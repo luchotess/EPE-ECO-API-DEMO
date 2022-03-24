@@ -1,0 +1,53 @@
+functions:
+  getStorehouses:
+    description: Get storehouses
+    handler: src/storehouses/controller.getStorehousesFunction
+    events:
+      - http:
+          path: storehouses/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createStorehouses:
+    description: Create storehouses
+    handler: src/storehouses/controller.createStorehousesFunction
+    events:
+      - http:
+          path: storehouses/property/{propertyId}
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  updateStorehouses:
+    description: Update storehouses
+    handler: src/storehouses/controller.updateStorehousesFunction
+    events:
+      - http:
+          path: storehouses/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteStorehouses:
+    description: Delete storehouses
+    handler: src/storehouses/controller.deleteStorehousesFunction
+    events:
+      - http:
+          path: storehouses/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+

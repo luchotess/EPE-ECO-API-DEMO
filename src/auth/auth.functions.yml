@@ -1,0 +1,40 @@
+functions:
+  login:
+    handler: src/auth/controller.login
+    events:
+      - http:
+          path: auth/login
+          method: post
+          cors:
+            - enabled: true
+            - origin: '*'
+            - headers: 'Content-Type'
+            - methods: 'PUT,POST'
+
+  storeLogin:
+    handler: src/auth/controller.storeLogin
+    events:
+      - http:
+          path: auth/login/{storeId}
+          method: post
+          cors:
+            - enabled: true
+            - origin: '*'
+            - headers: 'Content-Type'
+            - methods: 'PUT,POST'
+
+  logout:
+    handler: src/auth/controller.logout
+    events:
+      - http:
+          path: auth/logout
+          method: post
+          cors: true
+
+  verify:
+    handler: src/auth/controller.verify
+    events:
+      - http:
+          path: auth/verify
+          method: post
+          cors: true

@@ -1,0 +1,49 @@
+functions:
+  getPaymentMethods:
+    description: Get payment method
+    handler: src/payment-methods/controller.getPaymentMethodsFunction
+    events:
+      - http:
+          path: payment-methods/property/{propertyId}
+          method: get
+          cors: true
+
+  createPaymentMethods:
+    description: Create payment  method
+    handler: src/payment-methods/controller.createPaymentMethodsFunction
+    events:
+      - http:
+          path: payment-methods/property/{propertyId}
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  updatePaymentMethods:
+    description: Update payment  method
+    handler: src/payment-methods/controller.updatePaymentMethodsFunction
+    events:
+      - http:
+          path: payment-methods/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deletePaymentMethods:
+    description: Delete payment  method
+    handler: src/payment-methods/controller.deletePaymentMethodsFunction
+    events:
+      - http:
+          path: payment-methods/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0

@@ -1,0 +1,79 @@
+functions:
+  getadmins:
+    description: Get admins
+    handler: src/admins/controller.getAdminsFunction
+    events:
+      - http:
+          path: admins
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getadminsProperties:
+    description: Get admins
+    handler: src/admins/controller.getAdminsPropertiesFunction
+    events:
+      - http:
+          path: admins/properties
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createAdmin:
+    description: Create one admin
+    handler: src/admins/controller.createAdminsFunction
+    events:
+      - http:
+          path: admins
+          method: post
+          cors: true
+#          authorizer:
+#            name: verify
+#            identitySource: method.request.header.Authorization
+#            resultTtlInSeconds: 0
+
+  updateOneAdmin:
+    description: Update one admin
+    handler: src/admins/controller.updateAdminsFunction
+    events:
+      - http:
+          path: admins/{id}
+          method: put
+          cors: true
+
+  updateOneAdminPassword:
+    description: Update admins password
+    handler: src/admins/controller.updateAdminPasswordFunction
+    events:
+      - http:
+          path: admins/{id}/password
+          method: post
+          cors: true
+
+  deleteOneAdmin:
+    description: Delete one admin
+    handler: src/admins/controller.deleteAdminsFunction
+    events:
+      - http:
+          path: admins/{id}
+          method: delete
+          cors: true
+
+  getOnePropertyAdminsCount:
+    description: Get property admins
+    handler: src/admins/controller.getPropertyAdminsFunction
+    events:
+      - http:
+          path: properties/{id}/admins
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0

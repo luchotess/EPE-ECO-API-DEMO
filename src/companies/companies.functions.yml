@@ -1,0 +1,55 @@
+functions:
+  getCompanies:
+    description: Get companies
+    handler: src/companies/controller.getCompaniesFunction
+    events:
+      - http:
+          path: companies
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createCompanies:
+    description: Create companies
+    handler: src/companies/controller.createCompaniesFunction
+    events:
+      - http:
+          path: companies
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  updateCompanies:
+    description: Update companies
+    handler: src/companies/controller.updateCompaniesFunction
+    events:
+      - http:
+          path: companies/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  deleteCompanies:
+    description: Delete companies
+    handler: src/companies/controller.deleteCompaniesFunction
+    events:
+      - http:
+          path: companies/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+

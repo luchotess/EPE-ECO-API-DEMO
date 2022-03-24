@@ -1,0 +1,64 @@
+functions:
+  getProducts:
+    description: Get products
+    handler: src/products/controller.getProductsFunction
+    events:
+      - http:
+          path: products/property/{propertyId}
+          method: get
+          cors: true
+
+  createProducts:
+    description: Create products
+    handler: src/products/controller.createProductsFunction
+    events:
+      - http:
+          path: products/property/{propertyId}
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  updateProducts:
+    description: Update products
+    handler: src/products/controller.updateProductsFunction
+    events:
+      - http:
+          path: products/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteProducts:
+    description: Delete products
+    handler: src/products/controller.deleteProductsFunction
+    events:
+      - http:
+          path: products/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  uploadPhoto:
+    description: Upload photo
+    handler: src/products/controller.uploadPhoto
+    events:
+      - http:
+          path: products/{id}/photo
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+    environment:
+      Bucket: ${self:custom.bucket}

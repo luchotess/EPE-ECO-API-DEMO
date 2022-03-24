@@ -1,0 +1,67 @@
+functions:
+  getServices:
+    description: Get services
+    handler: src/services/controller.getServicesFunction
+    events:
+      - http:
+          path: services/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  getUserServices:
+    description: Get User Services
+    handler: src/services/controller.getUserServicesFunction
+    events:
+      - http:
+          path: services/property/{propertyId}/user/{userId}
+          method: get
+          cors: true
+
+  getBookingServices:
+    description: Get User Services
+    handler: src/services/controller.getBookingServicesFunction
+    events:
+      - http:
+          path: booking-services/property/{propertyId}/
+          method: get
+          cors: true
+
+  placeCourseOrder:
+    description: Place course order
+    handler: src/services/controller.placeCourseOrderFunction
+    events:
+      - http:
+          path: services/property/{propertyId}/place
+          method: post
+          cors: true
+
+  updateServices:
+    description: Update services
+    handler: src/services/controller.updateServicesFunction
+    events:
+      - http:
+          path: services/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  deleteServices:
+    description: Delete services
+    handler: src/services/controller.deleteServicesFunction
+    events:
+      - http:
+          path: services/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+

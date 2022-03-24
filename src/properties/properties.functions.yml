@@ -1,0 +1,126 @@
+functions:
+  getProperties:
+    description: Get properties
+    handler: src/properties/controller.getPropertiesFunction
+    events:
+      - http:
+          path: properties
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getUserProperties:
+    description: Get user properties
+    handler: src/properties/controller.getUserPropertiesFunction
+    events:
+      - http:
+          path: properties/user/{id}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getOneProperties:
+    description: Get properties
+    handler: src/properties/controller.getOnePropertiesFunction
+    events:
+      - http:
+          path: properties/{id}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getPropertyCategories:
+    description: Get property categories
+    handler: src/properties/controller.getPropertyCategories
+    events:
+      - http:
+          path: properties/{id}/categories
+          method: get
+          cors: true
+
+  createProperties:
+    description: Create properties
+    handler: src/properties/controller.createPropertiesFunction
+    events:
+      - http:
+          path: properties
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  updateProperties:
+    description: Update properties
+    handler: src/properties/controller.updatePropertiesFunction
+    events:
+      - http:
+          path: properties/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteProperties:
+    description: Delete properties
+    handler: src/properties/controller.deletePropertiesFunction
+    events:
+      - http:
+          path: properties/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteUserFromProperty:
+    description: Delete user from property
+    handler: src/properties/controller.deleteUserFromPropertyFunction
+    events:
+      - http:
+          path: properties/{id}/user/{userId}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  verifyProperties:
+    description: Delete properties
+    handler: src/properties/controller.verifyPropertiesFunction
+    events:
+      - http:
+          path: properties/verify/{userId}
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deployProductsToProperty:
+    description: Deploy products to property
+    handler: src/properties/controller.deploysProductsToProperty
+    events:
+      - http:
+          path: properties/{id}/deployProducts
+          method: post
+          cors: true
+#          authorizer:
+#            name: verify
+#            identitySource: method.request.header.Authorization
+#            resultTtlInSeconds: 0

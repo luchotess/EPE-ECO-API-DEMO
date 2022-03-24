@@ -1,0 +1,71 @@
+functions:
+  getOrders:
+    description: Get orders
+    handler: src/orders/controller.getOrdersFunction
+    events:
+      - http:
+          path: orders/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  getUserOrders:
+    description: Get User Orders
+    handler: src/orders/controller.getUserOrdersFunction
+    events:
+      - http:
+          path: orders/property/{propertyId}/user/{userId}
+          method: get
+          cors: true
+
+  createOrders:
+    description: Create orders
+    handler: src/orders/controller.createOrdersFunction
+    events:
+      - http:
+          path: orders/property/{propertyId}
+          method: post
+          cors: true
+
+  updateOrders:
+    description: Update orders
+    handler: src/orders/controller.updateOrdersFunction
+    events:
+      - http:
+          path: orders/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  deleteOrders:
+    description: Delete orders
+    handler: src/orders/controller.deleteOrdersFunction
+    events:
+      - http:
+          path: orders/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  updateOrderStatus:
+    description: Delete orders
+    handler: src/orders/controller.changeOrderStatusFunction
+    events:
+      - http:
+          path: orders/{id}/status
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+

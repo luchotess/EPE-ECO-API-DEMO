@@ -1,0 +1,49 @@
+functions:
+  getSubscribers:
+    description: Get subscribers
+    handler: src/subscribers/controller.getSubscribersFunction
+    events:
+      - http:
+          path: subscribers/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createSubscribers:
+    description: Create subscribers
+    handler: src/subscribers/controller.createSubscribersFunction
+    events:
+      - http:
+          path: subscribers/property/{propertyId}
+          method: post
+          cors: true
+
+  updateSubscribers:
+    description: Update subscribers
+    handler: src/subscribers/controller.updateSubscribersFunction
+    events:
+      - http:
+          path: subscribers/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteSubscribers:
+    description: Delete subscribers
+    handler: src/subscribers/controller.deleteSubscribersFunction
+    events:
+      - http:
+          path: subscribers/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+

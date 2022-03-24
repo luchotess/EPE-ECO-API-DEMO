@@ -1,0 +1,68 @@
+functions:
+  getCourses:
+    description: Get courses
+    handler: src/courses/controller.getCoursesFunction
+    events:
+      - http:
+          path: courses/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  getUserCourses:
+    description: Get User Courses
+    handler: src/courses/controller.getUserCoursesFunction
+    events:
+      - http:
+          path: courses/property/{propertyId}/user/{userId}
+          method: get
+          cors: true
+
+  getBookingCourses:
+    description: Get User Courses
+    handler: src/courses/controller.getBookingCoursesFunction
+    events:
+      - http:
+          path: booking-courses/property/{propertyId}/
+          method: get
+          cors: true
+
+  placeCourseOrder:
+    description: Place course order
+    handler: src/courses/controller.placeCourseOrderFunction
+    events:
+      - http:
+          path: courses/property/{propertyId}/place
+          method: post
+          cors: true
+
+  updateCourses:
+    description: Update courses
+    handler: src/courses/controller.updateCoursesFunction
+    events:
+      - http:
+          path: courses/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+
+  deleteCourses:
+    description: Delete courses
+    handler: src/courses/controller.deleteCoursesFunction
+    events:
+      - http:
+          path: courses/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+

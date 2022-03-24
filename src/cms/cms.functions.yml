@@ -1,0 +1,37 @@
+functions:
+  uploadFile:
+    handler: src/cms/controller.uploadFile
+    events:
+      - http:
+          path: cms/files/{propertyId}
+          method: post
+          cors:
+            - enabled: true
+            - origin: '*'
+            - headers: 'Content-Type'
+            - methods: 'PUT,POST'
+
+    removeFile:
+      handler: src/cms/controller.removeFile
+      events:
+        - http:
+            path: cms/files
+            method: delete
+            cors:
+              - enabled: true
+              - origin: '*'
+              - headers: 'Content-Type'
+              - methods: 'PUT,POST, DELETE'
+
+  saveContent:
+    handler: src/cms/controller.saveContent
+    events:
+      - http:
+          path: cms/content/{propertyId}
+          method: post
+          cors:
+            - enabled: true
+            - origin: '*'
+            - headers: 'Content-Type'
+            - methods: 'PUT,POST'
+

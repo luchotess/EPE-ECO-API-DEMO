@@ -1,0 +1,117 @@
+functions:
+  storeRegister:
+    handler: src/users/controller.createUsersFunction
+    events:
+      - http:
+          path: auth/register/{storeId}
+          method: post
+          cors:
+            - enabled: true
+            - origin: '*'
+            - headers: 'Content-Type'
+            - methods: 'PUT,POST'
+
+  getOneUser:
+    description: Get one user
+    handler: src/users/controller.getOneUserFunction
+    events:
+      - http:
+          path: users/{id}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getusers:
+    description: Get all users
+    handler: src/users/controller.getUsersFunction
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  getUsersFromProperty:
+    description: Get users
+    handler: src/users/controller.getUsersFromPropertyFunction
+    events:
+      - http:
+          path: users/property/{storeId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+            getUsersProperties:
+              description: Get users
+              handler: src/users/controller.getUsersPropertiesFunction
+              events:
+                - http:
+                    path: users/properties
+                    method: get
+                    cors: true
+                    authorizer:
+                      name: verify
+                      identitySource: method.request.header.Authorization
+                      resultTtlInSeconds: 0
+
+  createStoreUser:
+    description: Create one store user
+    handler: src/users/controller.createUsersFunction
+    events:
+      - http:
+          path: users
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  updateUser:
+    description: Update one user
+    handler: src/users/controller.updateUsersFunction
+    events:
+      - http:
+          path: users/{id}
+          method: put
+          cors: true
+
+  updateAdminPassword:
+    description: Update users password
+    handler: src/users/controller.updateAdminPasswordFunction
+    events:
+      - http:
+          path: users/{id}/password
+          method: post
+          cors: true
+
+  deleteAdmin:
+    description: Delete one user
+    handler: src/users/controller.deleteUserFunction
+    events:
+      - http:
+          path: users/{id}
+          method: delete
+          cors: true
+
+  getPropertyUsersCount:
+    description: Get property users
+    handler: src/users/controller.getPropertyUsersFunction
+    events:
+      - http:
+          path: properties/{id}/users
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0

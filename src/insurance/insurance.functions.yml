@@ -1,0 +1,48 @@
+functions:
+  getInsurance:
+    description: Get insurance
+    handler: src/insurance/controller.getInsuranceFunction
+    events:
+      - http:
+          path: insurance/property/{propertyId}
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createInsurance:
+    description: Create insurance
+    handler: src/insurance/controller.createInsuranceFunction
+    events:
+      - http:
+          path: insurance/property/{propertyId}
+          method: post
+          cors: true
+
+  updateInsurance:
+    description: Update insurance
+    handler: src/insurance/controller.updateInsuranceFunction
+    events:
+      - http:
+          path: insurance/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteInsurance:
+    description: Delete insurance
+    handler: src/insurance/controller.deleteInsuranceFunction
+    events:
+      - http:
+          path: insurance/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0

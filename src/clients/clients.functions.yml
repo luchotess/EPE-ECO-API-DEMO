@@ -1,0 +1,55 @@
+functions:
+  getClients:
+    description: Get clients
+    handler: src/clients/controller.getClientsFunction
+    events:
+      - http:
+          path: clients
+          method: get
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  createClients:
+    description: Create clients
+    handler: src/clients/controller.createClientsFunction
+    events:
+      - http:
+          path: clients
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  updateClients:
+    description: Update clients
+    handler: src/clients/controller.updateClientsFunction
+    events:
+      - http:
+          path: clients/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  deleteClients:
+    description: Delete clients
+    handler: src/clients/controller.deleteClientsFunction
+    events:
+      - http:
+          path: clients/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+

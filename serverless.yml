@@ -1,0 +1,64 @@
+service: altpaca-e-commerce
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-plugin-split-stacks
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    port: 3000
+  splitStacks:
+    perFunction: false
+    perType: true
+    perGroupFunction: false
+  bucket: xxxx
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ses:SendEmail
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+        - "s3:PutObjectAcl"
+        - "s3:GetObject"
+      Resource:
+        - "arn:aws:s3:::${self:custom.bucket}/*"
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+
+functions:
+  - ${file(src/admins/admins.functions.yml):functions}
+  - ${file(src/auth/auth.functions.yml):functions}
+  - ${file(src/clients/clients.functions.yml):functions}
+  - ${file(src/companies/companies.functions.yml):functions}
+  - ${file(src/products/products.functions.yml):functions}
+  - ${file(src/users/users.functions.yml):functions}
+  - ${file(src/cms/cms.functions.yml):functions}
+  - ${file(src/orders/orders.functions.yml):functions}
+  - ${file(src/courses/courses.functions.yml):functions}
+  - ${file(src/properties/properties.functions.yml):functions}
+  - ${file(src/payment-methods/payment-methods.functions.yml):functions}
+  - ${file(src/coupons/coupons.functions.yml):functions}
+  - ${file(src/storehouses/storehouses.functions.yml):functions}
+  - ${file(src/insurance/insurance.functions.yml):functions}
+  - ${file(src/subscribers/subscribers.functions.yml):functions}
+  - ${file(src/services/services.functions.yml):functions}

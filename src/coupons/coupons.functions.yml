@@ -1,0 +1,49 @@
+functions:
+  getCoupons:
+    description: Get payment method
+    handler: src/coupons/controller.getCouponsFunction
+    events:
+      - http:
+          path: coupons/property/{propertyId}
+          method: get
+          cors: true
+
+  createCoupons:
+    description: Create payment  method
+    handler: src/coupons/controller.createCouponsFunction
+    events:
+      - http:
+          path: coupons/property/{propertyId}
+          method: post
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+
+  updateCoupons:
+    description: Update payment  method
+    handler: src/coupons/controller.updateCouponsFunction
+    events:
+      - http:
+          path: coupons/{id}
+          method: put
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+
+  deleteCoupons:
+    description: Delete payment  method
+    handler: src/coupons/controller.deleteCouponsFunction
+    events:
+      - http:
+          path: coupons/{id}
+          method: delete
+          cors: true
+          authorizer:
+            name: verify
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0

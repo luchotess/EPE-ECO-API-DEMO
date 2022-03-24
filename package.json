@@ -1,0 +1,35 @@
+{
+  "name": "altpaca-e-commerce",
+  "version": "1.0.0",
+  "description": "altpaca-e-commerce",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "sls offline --useSeparateProcesses",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.31",
+    "@types/express": "^4.17.1",
+    "@types/node": "^8.9.5",
+    "aws-sdk": "^2.787.0",
+    "bcryptjs": "^2.4.3",
+    "busboy": "^0.3.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.9.5",
+    "dotenv": "^8.2.0",
+    "jimp": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "5.9.29",
+    "serverless-offline": "^5.12.1",
+    "serverless-plugin-typescript": "^1.1.9",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "typescript": "^3.6.4",
+    "uuidv4": "^6.2.5"
+  },
+  "devDependencies": {
+    "serverless-plugin-split-stacks": "^1.9.3"
+  }
+}
